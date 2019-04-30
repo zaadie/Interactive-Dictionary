@@ -4,6 +4,7 @@ from difflib import get_close_matches
 # Load JSON file with dictionary data
 data = json.load(open("data.json"))
 
+
 def translate(w):
     # Convert all user input to lowercase letters
     w = w.lower()
@@ -18,10 +19,11 @@ def translate(w):
     # Apply uppercase to all letters and check for matches in dictionary file
     elif w.upper() in data:
         return data[w.upper()]
-    
+
     # Suggestions if there aren't any matches and confirm correct input
-    elif len(get_close_matches(w,data.keys())) > 0:
-        yn = input("Did you mean % s instead? Enter Y if yes, or N if no: " % get_close_matches(w, data.keys())[0])
+    elif len(get_close_matches(w, data.keys())) > 0:
+        yn = input("Did you mean % s instead? Enter Y if yes, or N if no: " %
+                   get_close_matches(w, data.keys())[0])
         if yn == "Y":
             return data[get_close_matches(w, data.keys())[0]]
         elif yn == "N":
@@ -31,26 +33,24 @@ def translate(w):
     else:
         return "The word doesn't exist please double check it."
 
+
 def initiate():
-    anotherWord = "";
+    anotherWord = ""
     while anotherWord == "":
         word = input("Enter word: ")
         output = translate(word)
-        i=1
+        i = 1
 
         if type(output) == list:
             for item in output:
                 print(i, item)
-                i+=1
+                i += 1
         else:
             print(output)
-        
+
         anotherWord = input("Hit Enter to query another word...")
     if anotherWord != "":
         print("See you next time")
-        
+
 
 initiate()
-
-
-
