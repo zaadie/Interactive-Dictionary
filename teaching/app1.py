@@ -8,18 +8,15 @@ data = json.load(open("data.json"))
 def translate(w):
     # Convert all user input to lowercase letters
     w = w.lower()
-
     # See if input matches JSON dictionary
     if w in data:
         return data[w]
     # Capitalize first letter and check for matches in dictionary file
     elif w.title() in data:
         return data[w.title()]
-
     # Apply uppercase to all letters and check for matches in dictionary file
     elif w.upper() in data:
         return data[w.upper()]
-
     # Suggestions if there aren't any matches and confirm correct input
     elif len(get_close_matches(w, data.keys())) > 0:
         yn = input("Did you mean % s instead? Enter Y if yes, or N if no: " %
